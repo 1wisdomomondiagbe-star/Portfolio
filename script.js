@@ -6,6 +6,9 @@ const setMenu = (open) => {
   menuToggle?.classList.toggle('is-open', open);
   mobileMenu?.classList.toggle('is-open', open);
   menuToggle?.setAttribute('aria-expanded', String(open));
+  menuToggle?.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  mobileMenu?.setAttribute('aria-hidden', String(!open));
+  document.body.classList.toggle('menu-open', open);
 };
 menuToggle?.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('is-open')));
 mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
@@ -57,16 +60,23 @@ const contactTriggers = document.querySelectorAll('[data-contact-trigger]');
 const contactClosers = document.querySelectorAll('[data-contact-close]');
 const contactEmail = contactModal?.querySelector('[data-contact-email]');
 const contactWhatsapp = contactModal?.querySelector('[data-contact-whatsapp]');
+const getFocusable = (container) => [...container.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')];
+let lastContactTrigger = null;
 
 const setContactModal = (open) => {
   contactModal?.classList.toggle('is-open', open);
   contactModal?.setAttribute('aria-hidden', String(!open));
   document.body.classList.toggle('modal-open', open);
-  if (open) contactModal?.querySelector('.modal-close')?.focus();
+  if (open) {
+    contactModal?.querySelector('.modal-close')?.focus();
+  } else {
+    lastContactTrigger?.focus();
+  }
 };
 
 contactTriggers.forEach((trigger) => trigger.addEventListener('click', (event) => {
   event.preventDefault();
+  lastContactTrigger = trigger;
   setMenu(false);
   const service = trigger.dataset.service;
   const subject = service ? `${service} enquiry` : 'Project enquiry';
@@ -78,5 +88,22 @@ contactTriggers.forEach((trigger) => trigger.addEventListener('click', (event) =
 }));
 contactClosers.forEach((closer) => closer.addEventListener('click', () => setContactModal(false)));
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') setContactModal(false);
+  if (event.key === 'Escape') {
+    if (contactModal?.classList.contains('is-open')) setContactModal(false);
+    if (mobileMenu?.classList.contains('is-open')) setMenu(false);
+    return;
+  }
+
+  if (event.key !== 'Tab' || !contactModal?.classList.contains('is-open')) return;
+  const focusable = getFocusable(contactModal);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 });
