@@ -46,6 +46,57 @@ filterButtons.forEach((button) => button.addEventListener('click', () => {
   });
 }));
 
+const driveGrid = document.querySelector('[data-drive-work-grid]');
+const driveFilters = document.querySelectorAll('[data-drive-filter]');
+const driveItems = Array.isArray(window.driveWorkItems) ? window.driveWorkItems : [];
+const driveCategoryLabel = (category) => category === 'Client work · Prism Legacy' ? 'Client work' : category;
+const renderDriveWork = (filter = 'all') => {
+  if (!driveGrid) return;
+  const visible = driveItems.filter((item) => filter === 'all' || item.category === filter);
+  driveGrid.replaceChildren(...visible.map((item, index) => {
+    const link = document.createElement('a');
+    link.className = 'drive-card reveal is-visible';
+    link.href = item.source;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.setAttribute('aria-label', `Open ${item.title} in Google Drive`);
+    const media = document.createElement('div');
+    media.className = 'drive-card-media';
+    const image = document.createElement('img');
+    image.src = item.thumbnail;
+    image.alt = `${item.title} thumbnail`;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    const kind = document.createElement('span');
+    kind.className = 'drive-card-kind';
+    kind.textContent = item.kind === 'video' ? 'Video · Drive' : 'Image · Drive';
+    const arrow = document.createElement('span');
+    arrow.className = 'drive-card-arrow';
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '↗';
+    media.append(image, kind, arrow);
+    const caption = document.createElement('div');
+    caption.className = 'drive-card-caption';
+    const title = document.createElement('div');
+    const strong = document.createElement('strong');
+    strong.textContent = item.title;
+    const small = document.createElement('small');
+    small.textContent = driveCategoryLabel(item.category);
+    title.append(strong, small);
+    const indexLabel = document.createElement('span');
+    indexLabel.className = 'drive-card-index';
+    indexLabel.textContent = String(index + 1).padStart(2, '0');
+    caption.append(title, indexLabel);
+    link.append(media, caption);
+    return link;
+  }));
+};
+renderDriveWork();
+driveFilters.forEach((button) => button.addEventListener('click', () => {
+  driveFilters.forEach((item) => item.classList.toggle('is-selected', item === button));
+  renderDriveWork(button.dataset.driveFilter);
+}));
+
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => anchor.addEventListener('click', (event) => {
   if (anchor.hasAttribute('data-contact-trigger')) return;
   const target = document.querySelector(anchor.getAttribute('href'));
