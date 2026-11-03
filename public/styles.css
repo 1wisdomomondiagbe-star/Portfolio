@@ -118,6 +118,19 @@ button { color: inherit; font: inherit; }
 .drive-card-caption small { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; letter-spacing: .09em; text-transform: uppercase; }
 .drive-card-index { color: var(--orange); font-size: 9px; letter-spacing: .12em; }
 .drive-note { margin: 25px 0 0; color: #77736b; font-size: 10px; }
+.category-page-main { min-height: 100svh; padding-top: clamp(145px, 18vw, 230px); padding-bottom: clamp(100px, 13vw, 180px); background: radial-gradient(circle at 82% 12%, rgba(242,162,75,.12), transparent 30%), var(--ink); }
+.category-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 330px); align-items: end; gap: 50px; padding-bottom: 64px; }
+.category-hero h1 { margin: 18px 0 0; font-family: var(--display); font-size: clamp(82px, 13vw, 190px); font-weight: 400; line-height: .78; letter-spacing: -.02em; text-transform: uppercase; }
+.category-hero h1 span { color: var(--orange); }
+.category-hero-lead { max-width: 300px; margin: 0 0 5px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.category-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding: 15px 0 24px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; }
+.category-toolbar a { color: var(--paper); transition: color .3s; }
+.category-toolbar a:hover { color: var(--orange); }
+.category-route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 18px; }
+.category-route-grid .drive-card:first-child:nth-last-child(1) { grid-column: span 2; }
+.category-footer { display: flex; justify-content: space-between; gap: 25px; align-items: center; border-top: 1px solid var(--line); padding-top: 28px; margin-top: 70px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; }
+.category-footer a { color: var(--orange); }
+.category-mobile-menu { display: none; }
 .work-route { padding-top: clamp(90px, 11vw, 155px); padding-bottom: clamp(95px, 12vw, 170px); background: #151514; }
 .work-route[hidden] { display: none; }
 .route-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding: 15px 0 24px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; }
@@ -253,6 +266,15 @@ button { color: inherit; font: inherit; }
   .drive-card-caption { display: block; }
   .drive-card-caption strong { font-size: 11px; }
   .drive-card-index { display: block; margin-top: 9px; }
+  .category-page-main { padding-top: 125px; padding-bottom: 85px; }
+  .category-hero { display: block; padding-bottom: 42px; }
+  .category-hero h1 { font-size: clamp(76px, 19vw, 135px); }
+  .category-hero-lead { margin-top: 32px; max-width: 285px; }
+  .category-toolbar { display: block; line-height: 2; }
+  .category-toolbar span { display: block; margin-top: 5px; }
+  .category-route-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
+  .category-route-grid .drive-card:first-child:nth-last-child(1) { grid-column: span 2; }
+  .category-footer { display: block; line-height: 2; margin-top: 52px; }
   .work-route { padding-top: 82px; padding-bottom: 85px; }
   .route-toolbar { display: block; line-height: 2; }
   .route-toolbar span { display: block; margin-top: 6px; }
