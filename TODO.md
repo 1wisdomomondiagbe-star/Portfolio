@@ -25,3 +25,6 @@
 - Add Open Graph and Twitter sharing metadata, canonical metadata, image loading hints, reduced-motion handling, and separated marquee rows.
 
 - Organize Selected Work into four routes: Edit, Animate, Build, and Brand; keep the homepage free of the full Drive archive and link each route’s project cards to the corresponding Google Drive files.
+- Keep the homepage limited to the four category cards; clicking Edit, Animate, Build, or Brand must navigate directly to its standalone page without rendering that category’s project cards on the homepage first.
+- Show verified web-design work on the Build page using working website or GitHub project links; do not present a broken live URL as a working website.
+- Provide a repeatable Drive refresh command that inventories the connected showcase folders, updates the static work data, downloads available thumbnails, and leaves the resulting files ready to commit and deploy to GitHub Pages.
