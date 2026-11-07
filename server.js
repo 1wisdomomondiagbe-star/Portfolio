@@ -31,7 +31,9 @@ const server = http.createServer((req, res) => {
     filePath = path.join(filePath, 'index.html');
   }
   if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
-    filePath = path.join(root, 'index.html');
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-cache' });
+    res.end('Not found');
+    return;
   }
   const ext = path.extname(filePath).toLowerCase();
   res.setHeader('Content-Type', mime[ext] || 'application/octet-stream');

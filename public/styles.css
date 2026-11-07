@@ -131,14 +131,7 @@ button { color: inherit; font: inherit; }
 .category-footer { display: flex; justify-content: space-between; gap: 25px; align-items: center; border-top: 1px solid var(--line); padding-top: 28px; margin-top: 70px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; }
 .category-footer a { color: var(--orange); }
 .category-mobile-menu { display: none; }
-.work-route { padding-top: clamp(90px, 11vw, 155px); padding-bottom: clamp(95px, 12vw, 170px); background: #151514; }
-.work-route[hidden] { display: none; }
-.route-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding: 15px 0 24px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; }
-.route-back { color: var(--paper); transition: color .3s; }
-.route-back:hover { color: var(--orange); }
-.route-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px 18px; }
-.route-grid .drive-card:first-child:nth-last-child(1) { grid-column: span 2; }
-.project-card:focus-visible, .route-back:focus-visible, .drive-card:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
+.project-card:focus-visible, .drive-card:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
 .services { background: #181817; margin-top: 120px; padding-bottom: clamp(100px, 13vw, 180px); }
 .services .section-heading { margin-bottom: 70px; }
 .service-list { border-top: 1px solid var(--line); }
@@ -275,11 +268,6 @@ button { color: inherit; font: inherit; }
   .category-route-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
   .category-route-grid .drive-card:first-child:nth-last-child(1) { grid-column: span 2; }
   .category-footer { display: block; line-height: 2; margin-top: 52px; }
-  .work-route { padding-top: 82px; padding-bottom: 85px; }
-  .route-toolbar { display: block; line-height: 2; }
-  .route-toolbar span { display: block; margin-top: 6px; }
-  .route-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
-  .route-grid .drive-card:first-child:nth-last-child(1) { grid-column: span 2; }
   .services { margin-top: 75px; }
   .service-row { grid-template-columns: 37px 1fr 25px; gap: 10px; min-height: 128px; }
   .service-row h3 { font-size: 41px; }

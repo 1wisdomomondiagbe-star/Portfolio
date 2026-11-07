@@ -14,7 +14,7 @@
 - Make the contact CTA open a chooser with Email and WhatsApp options; Email opens the mail app with the supplied address, and WhatsApp opens the WhatsApp conversation for the supplied number.
 
 - Duplicate the Creative disciplines marquee so the second copy moves in the opposite direction.
-- In the 06 / Let’s talk panel, remove the visible email and phone links and style the Let’s talk CTA as a small orange box using the site accent color.
+- In the 05 / Let’s talk panel, remove the visible email and phone links and style the Let’s talk CTA as a small orange box using the site accent color.
 
 - Improve mobile navigation accessibility with an accessible menu label, aria-hidden state, Escape-to-close behavior, and scroll locking.
 - Improve contact-modal accessibility with a description, focus return to the triggering control, and keyboard Tab focus trapping.
