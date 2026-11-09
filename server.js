@@ -17,9 +17,32 @@ const mime = {
   '.webp': 'image/webp',
   '.ico': 'image/x-icon'
 };
+const cacheControl = {
+  html: 'no-cache',
+  data: 'no-cache',
+  code: 'public, max-age=3600, must-revalidate',
+  asset: 'public, max-age=86400, must-revalidate'
+};
+
+function cachePolicy(ext) {
+  if (ext === '.html') return cacheControl.html;
+  if (ext === '.json') return cacheControl.data;
+  if (ext === '.css' || ext === '.js') return cacheControl.code;
+  return cacheControl.asset;
+}
 
 const server = http.createServer((req, res) => {
-  const requestPath = decodeURIComponent((req.url || '/').split('?')[0]);
+  let requestPath;
+  try {
+    requestPath = decodeURIComponent((req.url || '/').split('?')[0]);
+  } catch {
+    res.writeHead(400, {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'no-store'
+    });
+    res.end('Bad request');
+    return;
+  }
   const safePath = path.normalize(requestPath).replace(/^([.][.][/\\])+/, '');
   let filePath = path.join(root, safePath === '/' ? 'index.html' : safePath);
   if (!filePath.startsWith(root)) {
@@ -31,13 +54,16 @@ const server = http.createServer((req, res) => {
     filePath = path.join(filePath, 'index.html');
   }
   if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
-    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-cache' });
+    res.writeHead(404, {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'no-store'
+    });
     res.end('Not found');
     return;
   }
   const ext = path.extname(filePath).toLowerCase();
   res.setHeader('Content-Type', mime[ext] || 'application/octet-stream');
-  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Cache-Control', cachePolicy(ext));
   fs.createReadStream(filePath).pipe(res);
 });
 
